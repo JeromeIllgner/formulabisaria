@@ -9,7 +9,7 @@ import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import f1 from '@/images/F1.svg'
+import formulaBisaria from '@/images/formulabisaria.png'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -248,7 +248,7 @@ function Avatar({
     >
       <div></div>
       <Image
-        src={f1}
+        src={formulaBisaria}
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
