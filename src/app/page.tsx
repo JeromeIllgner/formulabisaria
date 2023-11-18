@@ -35,10 +35,9 @@ export default async function Home() {
             to compensate for his lack of personality (and other things).
             We&apos;re so proud of you, Ani!
           </p>
-          {/* <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            Make sure to register to appear in the driver&apos;s standings
-            below.
-          </p> */}
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+            Make sure to register to appear in the driver&apos;s standings.
+          </p>
         </div>
       </Container>
       <Photos />

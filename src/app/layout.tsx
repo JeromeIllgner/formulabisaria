@@ -4,6 +4,7 @@ import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
+import { Toaster } from '@/components/ui/Toaster'
 
 export const metadata: Metadata = {
   title: {
@@ -30,6 +31,7 @@ export default function RootLayout({
           <div className="flex w-full">
             <Layout>{children}</Layout>
           </div>
+          <Toaster />
         </Providers>
       </body>
     </html>
