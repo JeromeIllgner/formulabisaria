@@ -2,18 +2,21 @@ import Image from 'next/image'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import image1 from '@/images/photos/ani-crab.jpeg'
-import image2 from '@/images/photos/ani_charge.jpeg'
-import image3 from '@/images/photos/ani-records.webp'
-import image4 from '@/images/photos/ani_kid.jpeg'
-import image5 from '@/images/photos/ani-suit.jpeg'
+import aniCrab from '@/images/photos/ani-crab.jpeg'
+import aniCharge from '@/images/photos/ani_charge.jpeg'
+import aniRecords from '@/images/photos/ani-records.webp'
+import aniKid from '@/images/photos/ani_kid.jpeg'
+import aniSuit from '@/images/photos/ani-suit.jpeg'
+import aniBrady from '@/images/photos/ani-brady.jpeg'
 import Table, { people } from '@/components/Table'
 import { Carousel } from '@/components/Carousel'
 
 function Photos() {
   return (
     <Container className="mt-16">
-      <Carousel photos={[image1, image2, image3, image4, image5]} />
+      <Carousel
+        photos={[aniKid, aniSuit, aniCrab, aniCharge, aniBrady, aniRecords]}
+      />
     </Container>
   )
 }

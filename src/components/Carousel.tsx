@@ -1,7 +1,7 @@
 'use client'
 
 // import Swiper core and required modules
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import { Pagination, Autoplay } from 'swiper/modules'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -17,24 +17,24 @@ export function Carousel({ photos = [] }: { photos: StaticImageData[] }) {
   return (
     <Swiper
       className="h-128"
-      modules={[Navigation, Pagination, Autoplay]}
+      autoplay={{ delay: 2000 }}
+      modules={[Pagination, Autoplay]}
       spaceBetween={50}
-      slidesPerView={1}
+      slidesPerView={3}
       navigation
       pagination={{ clickable: true }}
     >
       {photos.map((image) => (
-        <SwiperSlide
-          className="flex w-full items-center justify-center"
-          key={image.src}
-        >
-          <div className="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+        <SwiperSlide key={image.src}>
+          <div className="flex w-full items-center justify-center">
+            <div className="relative aspect-[9/10] w-full flex-none overflow-hidden rounded-xl sm:w-72 sm:rounded-2xl">
+              <Image
+                src={image}
+                alt=""
+                sizes="(min-width: 640px) 18rem, 11rem"
+                className="absolute inset-0 m-4 h-full w-full rounded-md object-cover"
+              />
+            </div>
           </div>
         </SwiperSlide>
       ))}
