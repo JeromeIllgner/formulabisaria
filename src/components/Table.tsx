@@ -42,7 +42,10 @@ export default function Table<T extends Record<string, string | number>>({
                         key={header}
                         className="whitespace-nowrap py-4 pl-6 pr-3  text-sm text-gray-500"
                       >
-                        {person[header]}
+                        {
+                          // @ts-ignore
+                          person[header]
+                        }
                       </td>
                     ))}
                   </tr>
