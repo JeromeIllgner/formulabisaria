@@ -21,7 +21,6 @@ export function Carousel({ photos = [] }: { photos: StaticImageData[] }) {
       modules={[Pagination, Autoplay]}
       spaceBetween={50}
       slidesPerView={3}
-      navigation
       pagination={{ clickable: true }}
     >
       {photos.map((image) => (
