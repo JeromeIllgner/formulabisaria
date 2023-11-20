@@ -1,33 +1,18 @@
-'use client'
-
-import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
-import { Input } from '@/components/Input'
-import { useToast } from '@/components/ui/use-toast'
-import { useForm } from 'react-hook-form'
-import { Driver } from '../api/driver/route'
-import { useEffect, useState } from 'react'
 import { Card } from '@/components/Card'
+import { connectToDatabase } from '@/lib/mongoClient'
 
-export default function RegistrationForm() {
-  const { register, handleSubmit } = useForm<Driver>()
-  const { toast } = useToast()
-  const [drivers, setDrivers] = useState<(Driver & { _id: string })[]>([])
-
-  const fetchDrivers = () => {
-    fetch('/api/driver')
-      .then((res) => res.json())
-      .then((data) => setDrivers(data))
-  }
-
-  useEffect(fetchDrivers, [])
+export default async function RegistrationForm() {
+  const db = await connectToDatabase()
+  const collection = db.collection('drivers')
+  const drivers = await collection.find().toArray()
 
   return (
     <>
-      <Container>
+      {/* <Container>
         <div className="mt-16 flex flex-col items-center">
           <h1 className="font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Register
+            Registration Closed
           </h1>
           <form
             onSubmit={handleSubmit(
@@ -121,7 +106,7 @@ export default function RegistrationForm() {
             <Button>Save Driver</Button>
           </form>
         </div>
-      </Container>
+      </Container> */}
       <Container>
         <div className="mt-16 flex flex-col items-center gap-2">
           <h1 className="font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
@@ -131,12 +116,19 @@ export default function RegistrationForm() {
           {drivers.map((driver) => (
             <Card
               className="w-64 items-center justify-center rounded-md bg-slate-200 p-2 dark:bg-zinc-800 md:w-full md:max-w-lg"
-              key={driver._id}
+              key={driver._id.toString()}
             >
               {driver.firstName} {driver.lastName}
               {driver.nickname ? ` (${driver.nickname})` : ''}
             </Card>
           ))}
+        </div>
+      </Container>
+      <Container>
+        <div className="mt-16 flex flex-col items-center gap-2">
+          <h1 className="font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+            Registration has closed for this event
+          </h1>
         </div>
       </Container>
     </>

@@ -6,7 +6,6 @@ type Lap = {
   fastestLap: string
   laps: number
   position: number
-  driver: string
   driverName: string
 }
 

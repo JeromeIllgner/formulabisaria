@@ -1,6 +1,3 @@
-import Image from 'next/image'
-import clsx from 'clsx'
-
 import { Container } from '@/components/Container'
 import aniCrab from '@/images/photos/ani-crab.jpeg'
 import aniCharge from '@/images/photos/ani_charge.jpeg'
@@ -8,7 +5,7 @@ import aniRecords from '@/images/photos/ani-records.webp'
 import aniKid from '@/images/photos/ani_kid.jpeg'
 import aniSuit from '@/images/photos/ani-suit.jpeg'
 import aniBrady from '@/images/photos/ani-brady.jpeg'
-import Table, { people } from '@/components/Table'
+import Table from '@/components/Table'
 import { Carousel } from '@/components/Carousel'
 
 function Photos() {
@@ -41,12 +38,12 @@ export default async function Home() {
         </div>
       </Container>
       <Photos />
-      {/* <Container className="mt-16">
+      <Container className="mt-16">
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-          Driver&apos;s Standings
+          Race results
         </h1>
-        <Table data={people} headers={Object.keys(people[0])} />
-      </Container> */}
+        <Table />
+      </Container>
     </>
   )
 }

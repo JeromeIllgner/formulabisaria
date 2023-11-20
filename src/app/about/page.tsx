@@ -1,15 +1,9 @@
-import { type Metadata } from 'next'
 import Image from 'next/image'
 
 import { Container } from '@/components/Container'
 import track from '@/images/track.png'
 
 const about = 'Welcome to Formula Bisaria'
-
-export const metadata: Metadata = {
-  title: 'About',
-  description: about,
-}
 
 export default function About() {
   return (

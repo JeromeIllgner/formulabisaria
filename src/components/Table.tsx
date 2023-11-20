@@ -1,20 +1,33 @@
+import { connectToDatabase } from '@/lib/mongoClient'
+
 export const people = [
   {
     Rank: 1,
     Driver: 'Jerome',
     BestLap: '43.2',
-    Kart: 12,
   },
   // More people...
 ]
 
-export default function Table<T extends Record<string, string | number>>({
-  headers,
-  data,
+const headers = [
+  { label: 'Position', key: 'position' },
+  { label: 'Driver', key: 'driverName' },
+  { label: 'Fastest Lap', key: 'fastestLapTime' },
+  { label: 'Average Lap', key: 'averageTime' },
+  { label: 'Gap', key: 'gap' },
+]
+
+export default async function Table({
+  filter = 'race',
 }: {
-  headers: string[]
-  data: T[]
+  filter?: 'race' | 'qualifying' | 'freePractice'
 }) {
+  const db = await connectToDatabase()
+  const collection = db.collection('laps')
+  const laps = await collection.find().toArray()
+
+  const filteredLaps = laps.filter((lap) => lap.raceType === filter)
+
   return (
     <div className="mt-8 flow-root">
       <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -25,29 +38,28 @@ export default function Table<T extends Record<string, string | number>>({
                 <tr>
                   {headers.map((header) => (
                     <th
-                      key={header}
+                      key={header.key}
                       scope="col"
                       className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                     >
-                      {header}
+                      {header.label}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {people.map((person) => (
-                  <tr key={person.Rank}>
-                    {headers.map((header) => (
-                      <td
-                        key={header}
-                        className="whitespace-nowrap py-4 pl-6 pr-3  text-sm text-gray-500"
-                      >
-                        {
-                          // @ts-ignore
-                          person[header]
-                        }
-                      </td>
-                    ))}
+                {filteredLaps.map((lap) => (
+                  <tr key={lap._id.toString()}>
+                    {headers.map((header) => {
+                      return (
+                        <td
+                          key={`${lap._id.toString()}-${header.key}`}
+                          className="whitespace-nowrap py-4 pl-6 pr-3  text-sm text-gray-500"
+                        >
+                          {lap[header.key]}
+                        </td>
+                      )
+                    })}
                   </tr>
                 ))}
               </tbody>
